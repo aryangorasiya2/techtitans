@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect - Farmer Marketplace</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Tailwind-like utility classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-between: space-between;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .gap-8 {
+            gap: 2rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .p-8 {
+            padding: 2rem;
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-6 {
+            margin-top: 1.5rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-16 {
+            width: 4rem;
+        }
+
+        .h-16 {
+            height: 4rem;
+        }
+
+        .h-48 {
+            height: 12rem;
+        }
+
+        .h-64 {
+            height: 16rem;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        .border {
+            border: 1px solid #e5e7eb;
+        }
+
+        .border-2 {
+            border-width: 2px;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-white {
+            background-color: white;
+        }
+
+        .bg-green-50 {
+            background-color: #f0fdf4;
+        }
+
+        .bg-green-600 {
+            background-color: #16a34a;
+        }
+
+        .text-green-600 {
+            color: #16a34a;
+        }
+
+        .text-green-700 {
+            color: #15803d;
+        }
+
+        .text-green-800 {
+            color: #166534;
+        }
+
+        .text-gray-500 {
+            color: #6b7280;
+        }
+
+        .text-gray-600 {
+            color: #4b5563;
+        }
+
+        .text-gray-700 {
+            color: #374151;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .object-cover {
+            object-fit: cover;
+        }
+
+        button {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        input, textarea, select {
+            outline: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #16a34a;
+            box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .flex-col {
+                flex-direction: row;
+            }
+
+            .grid-cols-1 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .w-full {
+                width: 24rem;
+            }
+
+            .text-4xl {
+                font-size: 3.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-cols-1 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Landing Page -->
+        <div id="landing-page" class="min-h-screen bg-gradient">
+            <div class="container py-16">
+                <!-- Hero Section -->
+                <div class="text-center mb-16">
+                    <h1 class="text-9x4 font-bold text-green-800 mb-4">
+                        Welcome to Kisan Setu
+                    </h1>
+                    <p class="text-xl text-green-700 mb-8">
+                        Connecting farmers directly with customers for fresh and organic products
+                    </p>
+                </div>
+
+                <!-- User Type Selection -->
+                <div class="flex flex-col gap-8 justify-center items-center">
+                    <button
+                        onclick="showLogin('farmer')"
+                        class="w-full bg-white rounded-xl shadow-lg p-8 flex flex-col items-center justify-center gap-4 border-2"
+                    >
+                        <i data-lucide="plant" class="w-16 h-16 text-green-600"></i>
+                        <h2 class="text-4xl font-semibold text-green-800">I'm a Farmer</h2>
+                        <p class="text-green-800 text-center">
+                            Sell your produce directly to customers
+                        </p>
+                    </button>
+
+                    <button
+                        onclick="showLogin('customer')"
+                        class="w-full bg-white rounded-xl shadow-lg p-8 flex flex-col items-center justify-center gap-4 border-2"
+                    >
+                        <i data-lucide="shopping-bag" class="w-16 h-16 text-green-600"></i>
+                        <h2 class="text-4xl font-semibold text-green-800">I'm a Customer</h2>
+                        <p class="text-green-600 text-center">
+                            Buy fresh and organic products directly from farmers
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="min-h-screen bg-gradient py-16 hidden">
+            <div class="container">
+                <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
+                    <h2 id="login-title" class="text-2xl font-bold text-center text-green-800 mb-8">
+                        Login
+                    </h2>
+                    
+                    <form id="login-form" class="space-y-6" onsubmit="handleLogin(event)">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">
+                                Email address
+                                
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                class="mt-1 block w-full rounded-md border p-2"
+                                placeholder="Enter your email"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                class="mt-1 block w-full rounded-md border p-2"
+                                placeholder="Enter your password"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full py-2 px-4 rounded-md text-sm font-medium text-white bg-green-600"
+                        >
+                            Sign in
+                        </button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <button
+                            onclick="showLanding()"
+                            class="text-green-600"
+                        >
+                            ← Back to selection
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Farmer Dashboard -->
+        <div id="farmer-dashboard" class="min-h-screen bg-gradient py-8 hidden">
+            <div class="container">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-green-800">Farmer Dashboard</h1>
+                    <button onclick="logout()" class="text-green-600 flex items-center gap-2">
+                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                        Logout
+                    </button>
+                </div>
+
+                <!-- Add New Crop Section -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-green-800 mb-4">Add New Crop</h2>
+                    <form id="crop-form" class="space-y-4" onsubmit="handleCropSubmit(event)">
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Crop Name</label>
+                                <input
+                                    type="text"
+                                    name="cropName"
+                                    required
+                                    class="mt-1 block w-full rounded-md border p-2"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Price per kg (₹)</label>
+                                <input
+                                    type="number"
+                                    name="price"
+                                    required
+                                    min="1"
+                                    class="mt-1 block w-full rounded-md border p-2"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Quantity Available (kg)</label>
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    required
+                                    min="1"
+                                    class="mt-1 block w-full rounded-md border p-2"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Crop Photo</label>
+                                <input
+                                    type="file"
+                                    name="photo"
+                                    accept="image/*"
+                                    required
+                                    class="mt-1 block w-full text-sm text-gray-500"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea
+                                    name="description"
+                                    rows="3"
+                                    class="mt-1 block w-full rounded-md border p-2"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <button
+                            type="submit"
+                            class="w-full md:w-auto px-6 py-2 bg-green-600 text-white rounded-md"
+                        >
+                            Add Crop
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Listed Crops -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-xl font-semibold text-green-800 mb-4">Your Listed Crops</h2>
+                    <div id="crops-list" class="grid grid-cols-1 gap-6">
+                        <!-- Crops will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Dashboard -->
+        <div id="customer-dashboard" class="min-h-screen bg-gradient py-8 hidden">
+            <div class="container">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-green-800">Available Crops</h1>
+                    <button onclick="logout()" class="text-green-600 flex items-center gap-2">
+                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                        Logout
+                    </button>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <div class="flex flex-col gap-4">
+                        <input
+                            type="text"
+                            placeholder="Search crops..."
+                            class="flex-1 rounded-md border p-2"
+                            onkeyup="filterCrops()"
+                        />
+                        <select
+                            class="rounded-md border p-2"
+                            onchange="filterCrops()"
+                        >
+                            <option value="">All Categories</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="grains">Grains</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Available Crops -->
+                <div id="available-crops" class="grid grid-cols-1 gap-6">
+                    <!-- Crops will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Get DOM elements
+        const landingPage = document.getElementById('landing-page');
+        const loginPage = document.getElementById('login-page');
+        const farmerDashboard = document.getElementById('farmer-dashboard');
+        const customerDashboard = document.getElementById('customer-dashboard');
+        const loginTitle = document.getElementById('login-title');
+        const loginForm = document.getElementById('login-form');
+        const cropsList = document.getElementById('crops-list');
+        const availableCrops = document.getElementById('available-crops');
+
+        // Current user type
+        let currentUserType = null;
+
+        // Sample data (replace with actual database)
+        let crops = [];
+
+        // Show login page
+        window.showLogin = (userType) => {
+            currentUserType = userType;
+            hideAllPages();
+            loginPage.classList.remove('hidden');
+            loginTitle.textContent = `${userType.charAt(0).toUpperCase() + userType.slice(1)} Login`;
+        };
+
+        // Show landing page
+        window.showLanding = () => {
+            hideAllPages();
+            landingPage.classList.remove('hidden');
+            currentUserType = null;
+            loginForm.reset();
+        };
+
+        // Hide all pages
+        const hideAllPages = () => {
+            landingPage.classList.add('hidden');
+            loginPage.classList.add('hidden');
+            farmerDashboard.classList.add('hidden');
+            customerDashboard.classList.add('hidden');
+        };
+
+        // Handle login form submission
+        window.handleLogin = (event) => {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Here you would typically make an API call to authenticate the user
+            console.log(`Logging in as ${currentUserType}:`, { email, password });
+            
+            hideAllPages();
+            if (currentUserType === 'farmer') {
+                farmerDashboard.classList.remove('hidden');
+                renderFarmerCrops();
+            } else {
+                customerDashboard.classList.remove('hidden');
+                renderAvailableCrops();
+            }
+        };
+
+        // Handle crop submission
+        window.handleCropSubmit = (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Create a URL for the uploaded image
+            const imageFile = formData.get('photo');
+            const imageUrl = URL.createObjectURL(imageFile);
+            
+            // Create new crop object
+            const newCrop = {
+                id: Date.now(),
+                name: formData.get('cropName'),
+                price: parseFloat(formData.get('price')),
+                quantity: parseInt(formData.get('quantity')),
+                description: formData.get('description'),
+                image: imageUrl,
+                farmerId: 'current-farmer-id', // Replace with actual farmer ID
+            };
+            
+            crops.push(newCrop);
+            form.reset();
+            renderFarmerCrops();
+            
+            // Show success message
+            alert('Crop added successfully!');
+        };
+
+        // Render farmer's crops
+        const renderFarmerCrops = () => {
+            const farmerCrops = crops.filter(crop => crop.farmerId === 'current-farmer-id');
+            cropsList.innerHTML = farmerCrops.map(crop => `
+                <div class="bg-green-50 rounded-lg p-4 shadow-lg">
+                    <img src="${crop.image}" alt="${crop.name}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-semibold text-green-800">${crop.name}</h3>
+                    <p class="text-gray-600 mb-2">${crop.description}</p>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-green-700">₹${crop.price}/kg</span>
+                        <span class="text-gray-500">${crop.quantity}kg available</span>
+                    </div>
+                    <button
+                        onclick="deleteCrop(${crop.id})"
+                        class="mt-4 w-full py-2 bg-red-100 text-red-600 rounded-md"
+                    >
+                        Remove Listing
+                    </button>
+                </div>
+            `).join('');
+        };
+
+        // Render available crops for customers
+        const renderAvailableCrops = () => {
+            availableCrops.innerHTML = crops.map(crop => `
+                <div class="bg-white rounded-lg p-4 shadow-lg">
+                    <img src="${crop.image}" alt="${crop.name}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-semibold text-green-800">${crop.name}</h3>
+                    <p class="text-gray-600 mb-2">${crop.description}</p>
+                    <div class="flex justify-between items-center text-sm mb-4">
+                        <span class="text-green-700">₹${crop.price}/kg</span>
+                        <span class="text-gray-500">${crop.quantity}kg available</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input
+                            type="number"
+                            min="1"
+                            max="${crop.quantity}"
+                            value="1"
+                            class="w-20 rounded-md border p-2"
+                        />
+                        <button
+                            onclick="purchaseCrop(${crop.id}, this.previousElementSibling.value)"
+                            class="flex-1 bg-green-600 text-white rounded-md py-2"
+                        >
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        // Delete crop
+        window.deleteCrop = (cropId) => {
+            if (confirm('Are you sure you want to remove this crop listing?')) {
+                crops = crops.filter(crop => crop.id !== cropId);
+                renderFarmerCrops();
+            }
+        };
+
+        // Purchase crop
+        window.purchaseCrop = (cropId, quantity) => {
+            const crop = crops.find(c => c.id === cropId);
+            if (!crop) return;
+            
+            quantity = parseInt(quantity);
+            if (quantity > crop.quantity) {
+                alert('Cannot purchase more than available quantity!');
+                return;
+            }
+            
+            const total = crop.price * quantity;
+            if (confirm(`Confirm purchase of ${quantity}kg ${crop.name} for ₹${total}?`)) {
+                crop.quantity -= quantity;
+                if (crop.quantity === 0) {
+                    crops = crops.filter(c => c.id !== cropId);
+                }
+                renderAvailableCrops();
+                alert('Purchase successful!');
+            }
+        };
+
+        // Filter crops
+        window.filterCrops = () => {
+            // Implementation for filtering crops
+            // This would filter based on search text and category
+            renderAvailableCrops();
+        };
+
+        // Logout
+        window.logout = () => {
+            if (confirm('Are you sure you want to logout?')) {
+                showLanding();
+            }
+        };
+
+        // Initialize Lucide icons after dynamic content updates
+        const updateIcons = () => {
+            lucide.createIcons();
+        };
+
+        // Call updateIcons after any dynamic content update
+        document.addEventListener('DOMContentLoaded', updateIcons);
+    </script>
+</body>
+</html>
